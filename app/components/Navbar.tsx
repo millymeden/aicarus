@@ -15,7 +15,7 @@ const navLinkClass =
   "hover:after:scale-x-100";
 
 const mobileLinkClass =
-  "block w-full rounded-md px-3 py-2 text-sm font-medium text-gray-100 " +
+  "block w-full rounded-md px-7 py-3 text-sm font-medium text-white/90 " +
   "hover:bg-white/10 hover:text-white transition-colors";
 
 export default function Navbar() {
@@ -111,7 +111,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile overlay + right drawer */}
+      {/* Mobile overlay + right floating panel */}
       {open && (
         <div className="md:hidden fixed inset-0 z-50">
           {/* dim overlay (click to close) */}
@@ -121,55 +121,59 @@ export default function Navbar() {
             onClick={() => setOpen(false)}
           />
 
-          {/* right-side drawer (half screen) */}
-          <div className="absolute right-0 top-0 h-full w-1/2 min-w-[260px] bg-slate-950/60 backdrop-blur-md border-l border-white/10 shadow-2xl">
-            <div className="flex items-center justify-between px-5 py-4 border-b border-white/10">
-              <span className="text-sm font-semibold tracking-wide text-white/90">
-                Menu
-              </span>
+          {/* floating panel (only as tall as needed) */}
+          <div className="absolute right-3 top-3 w-[min(340px,calc(100vw-24px))]">
+            <div className="relative overflow-hidden rounded-xl border border-white/10 bg-slate-950/60 backdrop-blur-md shadow-2xl">
+              {/* subtle left-edge glow */}
+              <div className="pointer-events-none absolute inset-y-0 left-0 w-[2px] bg-gradient-to-b from-blue-400/50 via-blue-500/25 to-transparent" />
 
-              {/* close button */}
-              <button
-                aria-label="Close menu"
-                className="rounded-md p-2 text-white/70 hover:text-white hover:bg-white/10 transition-colors"
-                onClick={() => setOpen(false)}
-              >
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
+              <div className="flex items-center justify-between px-5 py-4 border-b border-white/10">
+                <span className="text-sm font-semibold tracking-wide text-white/90">
+                  Menu
+                </span>
+
+                <button
+                  aria-label="Close menu"
+                  className="rounded-md p-2 text-white/70 hover:text-white hover:bg-white/10 transition-colors"
+                  onClick={() => setOpen(false)}
                 >
-                  <path
-                    d="M6 6L18 18M18 6L6 18"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                  />
-                </svg>
-              </button>
-            </div>
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M6 6L18 18M18 6L6 18"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                </button>
+              </div>
 
-            <div className="px-4 py-4 space-y-1">
-              <Link href="/about" className={mobileLinkClass}>
-                About
-              </Link>
-              <Link href="/blog" className={mobileLinkClass}>
-                Making Sense of AI?
-              </Link>
-              <Link href="/basics" className={mobileLinkClass}>
-                The Basics
-              </Link>
-              <Link href="/visual" className={mobileLinkClass}>
-                Where Are We Now?
-              </Link>
-            </div>
+              <div className="px-4 py-4 space-y-1">
+                <Link href="/about" className={mobileLinkClass}>
+                  About
+                </Link>
+                <Link href="/blog" className={mobileLinkClass}>
+                  Making Sense of AI?
+                </Link>
+                <Link href="/basics" className={mobileLinkClass}>
+                  The Basics
+                </Link>
+                <Link href="/visual" className={mobileLinkClass}>
+                  Where Are We Now?
+                </Link>
+              </div>
 
-            <div className="px-5 py-4 border-t border-white/10">
-              <p className="text-xs text-white/50">
-                Aicarus — AI safety, clearly explained.
-              </p>
+              <div className="px-5 py-4 border-t border-white/10">
+                <p className="text-xs text-white/50">
+                  Aicarus — AI safety, clearly explained.
+                </p>
+              </div>
             </div>
           </div>
         </div>
