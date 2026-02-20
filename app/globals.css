@@ -24,3 +24,101 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+
+:root {
+  /* Surfaces */
+  --bg: 255 255 255;
+  --surface: 250 250 251;
+  --card: 255 255 255;
+
+  /* Text */
+  --text: 17 24 39;        /* slate-900-ish */
+  --muted: 75 85 99;       /* gray-600-ish */
+  --faint: 107 114 128;    /* gray-500-ish */
+
+  /* Borders */
+  --border: 229 231 235;   /* gray-200-ish */
+
+  /* Accent */
+  --accent: 37 99 235;     /* blue-600-ish */
+  --accent-soft: 59 130 246; /* blue-500-ish */
+}
+
+/* Optional: if you later add dark mode */
+.dark {
+  --bg: 10 12 18;
+  --surface: 14 17 26;
+  --card: 17 21 32;
+  --text: 241 245 249;
+  --muted: 148 163 184;
+  --faint: 100 116 139;
+  --border: 30 41 59;
+  --accent: 59 130 246;
+  --accent-soft: 96 165 250;
+}
+
+@layer components {
+  .aicarus-page {
+    @apply min-h-screen;
+    background: rgb(var(--bg));
+    color: rgb(var(--text));
+  }
+
+  .aicarus-container { @apply mx-auto max-w-3xl px-6; }
+  
+
+  .aicarus-section {
+    @apply py-12;
+  }
+
+  .aicarus-card {
+    @apply rounded-xl border;
+    background: rgb(var(--card));
+    border-color: rgb(var(--border));
+  }
+
+  .aicarus-muted {
+    color: rgb(var(--muted));
+  }
+
+  .aicarus-divider {
+    @apply border-t;
+    border-color: rgb(var(--border));
+  }
+
+  .aicarus-glowline {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(59, 130, 246, 0.35),
+      transparent
+    );
+  }
+
+  .aicarus-link {
+    @apply font-medium transition-colors;
+    color: rgb(var(--text));
+  }
+  .aicarus-link:hover {
+    color: rgb(var(--accent));
+  }
+
+  .aicarus-button {
+    @apply inline-flex items-center justify-center rounded-md px-4 py-2 font-medium transition-colors;
+    background: rgb(var(--accent));
+    color: white;
+  }
+  .aicarus-button:hover {
+    background: rgb(var(--accent-soft));
+  }
+
+  .aicarus-input {
+    @apply w-full rounded-md border px-4 py-2 focus:outline-none focus:ring-2;
+    background: rgb(var(--card));
+    border-color: rgb(var(--border));
+    color: rgb(var(--text));
+    --tw-ring-color: rgba(59, 130, 246, 0.6);
+  }
+}

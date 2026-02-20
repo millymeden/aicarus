@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+
 import Navbar from "./components/Navbar";
 import NewsletterGate from "./components/NewsletterGate";
 
-// Google Fonts
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -15,23 +15,25 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// Metadata
 export const metadata: Metadata = {
   title: "Aicarus",
   description: "AI Safety initiative",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased aicarus-page`}
       >
-        {/* Navbar always appears at the top */}
         <Navbar />
 
-        {/* Page-specific content */}
-        {children}
+        <main className="aicarus-container aicarus-section">{children}</main>
+
         <NewsletterGate />
       </body>
     </html>

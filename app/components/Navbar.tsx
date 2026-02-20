@@ -6,7 +6,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 const navLinkClass =
-  "relative text-sm font-medium text-gray-800 tracking-wide " +
+  "text-[18px] font-medium text-gray-800 tracking-wide " +
   "transition-all duration-200 ease-out " +
   "hover:text-blue-600 hover:-translate-y-[1px] " +
   "after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full " +
@@ -31,7 +31,7 @@ export default function Navbar() {
       {/* subtle high-tech top glow */}
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-500/40 to-transparent" />
 
-      <div className="mx-auto flex max-w-6xl items-center px-6 py-2">
+      <div className="flex items-center px-6 py-2">
         {/* Left group */}
         <div className="flex items-center gap-8">
           <Link href="/" className="flex items-center leading-none shrink-0">
@@ -40,7 +40,7 @@ export default function Navbar() {
               alt="Aicarus Logo"
               width={1036}
               height={704}
-              className="block h-25 w-auto"
+              className="block h-35 w-auto"
               priority
             />
           </Link>
@@ -75,15 +75,15 @@ export default function Navbar() {
           {/* Mobile hamburger */}
           <button
             type="button"
-            className="md:hidden inline-flex items-center justify-center rounded-md p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 transition-colors"
+            className="md:hidden inline-flex items-center justify-center rounded-lg p-3 text-gray-500 hover:text-gray-700 hover:bg-gray-100 transition-colors"
             aria-label="Open menu"
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
           >
             {/* Prettier high-tech hamburger (more spacing) */}
             <svg
-              width="24"
-              height="24"
+              width="40"
+              height="40"
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -122,7 +122,7 @@ export default function Navbar() {
           />
 
           {/* floating panel (only as tall as needed) */}
-          <div className="absolute right-3 top-3 w-[min(340px,calc(100vw-24px))]">
+          <div className="absolute right-3 top-3 w-1/2 min-w-[240px] max-w-[360px]">
             <div className="relative overflow-hidden rounded-xl border border-white/10 bg-slate-950/60 backdrop-blur-md shadow-2xl">
               {/* subtle left-edge glow */}
               <div className="pointer-events-none absolute inset-y-0 left-0 w-[2px] bg-gradient-to-b from-blue-400/50 via-blue-500/25 to-transparent" />
