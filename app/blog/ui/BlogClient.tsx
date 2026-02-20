@@ -57,7 +57,7 @@ export default function BlogClient({
     <div className="space-y-6">
       {/* Search row */}
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div className="relative w-full sm:max-w-md">
+        <div className="relative w-full">
           <div className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-gray-400">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
               <path
@@ -83,9 +83,7 @@ export default function BlogClient({
           />
         </div>
 
-        <div className="text-sm text-gray-500 sm:text-right">
-          {filtered.length} {filtered.length === 1 ? "post" : "posts"}
-        </div>
+        
       </div>
 
       {/* Filters */}
