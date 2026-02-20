@@ -16,8 +16,7 @@ export default function BlogPage() {
   ];
 
   return (
-    <>
-      {/* Page header */}
+    <div className="max-w-3xl mx-auto">
       <div>
         <div className="kicker">Blog</div>
         <h1 className="h1">Making Sense of AI?</h1>
@@ -29,6 +28,6 @@ export default function BlogPage() {
       </div>
 
       <BlogClient posts={posts} featuredTags={featuredTags} />
-    </>
+    </div>
   );
 }

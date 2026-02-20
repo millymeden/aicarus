@@ -9,9 +9,7 @@ function normalize(s: string) {
 }
 
 function formatDate(iso: string) {
-  // If you ever leave date blank, don’t crash
   if (!iso) return "";
-  // Light, readable, “editorial” style
   try {
     return new Date(iso).toLocaleDateString(undefined, {
       year: "numeric",
@@ -44,7 +42,6 @@ export default function BlogClient({
 
   const filtered = useMemo(() => {
     const q = normalize(query);
-
     return posts.filter((p) => {
       const matchesTag = activeTag ? p.tags.includes(activeTag) : true;
       const matchesQuery =
@@ -52,14 +49,13 @@ export default function BlogClient({
         normalize(p.title).includes(q) ||
         normalize(p.summary).includes(q) ||
         p.tags.some((t) => normalize(t).includes(q));
-
       return matchesTag && matchesQuery;
     });
   }, [posts, query, activeTag]);
 
   return (
-    <div className="space-y-8">
-      {/* Search + count */}
+    <div className="space-y-6">
+      {/* Search row */}
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div className="relative w-full sm:max-w-md">
           <div className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-gray-400">
@@ -82,20 +78,20 @@ export default function BlogClient({
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search posts…"
-            className="w-full rounded-xl border border-gray-200 bg-white py-3 pl-10 pr-3 text-gray-900 placeholder:text-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500/30"
+            className="w-full rounded-xl border border-gray-200 bg-white py-3 pl-10 pr-3 text-gray-900 placeholder:text-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500/25"
           />
         </div>
 
-        <div className="text-sm text-gray-500">
+        <div className="text-sm text-gray-500 sm:text-right">
           {filtered.length} {filtered.length === 1 ? "post" : "posts"}
         </div>
       </div>
 
-      {/* Filter chips */}
-      <div className="flex flex-wrap items-center gap-2">
+      {/* Filters */}
+      <div className="flex flex-wrap gap-2">
         <button
           onClick={() => setActiveTag(null)}
-          className={`rounded-full px-4 py-2 text-sm transition ${
+          className={`rounded-full px-4 py-2 text-sm font-medium transition ${
             activeTag === null
               ? "bg-gray-900 text-white"
               : "bg-gray-100 text-gray-700 hover:bg-gray-200"
@@ -108,7 +104,7 @@ export default function BlogClient({
           <button
             key={tag}
             onClick={() => setActiveTag((t) => (t === tag ? null : tag))}
-            className={`rounded-full px-4 py-2 text-sm transition ${
+            className={`rounded-full px-4 py-2 text-sm font-medium transition ${
               activeTag === tag
                 ? "bg-blue-600 text-white"
                 : "bg-gray-100 text-gray-700 hover:bg-gray-200"
@@ -119,23 +115,21 @@ export default function BlogClient({
         ))}
       </div>
 
-      {/* Editorial list */}
-      <div className="rounded-2xl border border-gray-200 bg-white">
+      {/* List */}
+      <div className="panel">
         {filtered.map((p, idx) => {
           const primaryTag = p.tags?.[0] ?? "";
           return (
             <div key={p.slug}>
               <Link
                 href={`/blog/${p.slug}`}
-                className="group block px-6 py-5 transition hover:bg-gray-50/80"
+                className="group block px-6 py-5 transition hover:bg-gray-50"
               >
+                {/* meta row */}
                 <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-gray-500">
                   {!!p.date && (
-                    <span className="font-medium text-gray-500">
-                      {formatDate(p.date)}
-                    </span>
+                    <span className="font-medium">{formatDate(p.date)}</span>
                   )}
-
                   {!!primaryTag && (
                     <span className="inline-flex items-center rounded-full border border-gray-200 bg-white px-3 py-1 text-xs font-medium text-gray-700">
                       {primaryTag}
@@ -143,18 +137,17 @@ export default function BlogClient({
                   )}
                 </div>
 
+                {/* title + arrow */}
                 <div className="mt-2 flex items-start justify-between gap-6">
                   <div className="min-w-0">
                     <h2 className="text-lg font-semibold text-gray-900 group-hover:text-blue-700 transition-colors">
                       {p.title}
                     </h2>
+
                     {!!p.summary && (
-                      <p className="mt-1 text-gray-600">
-                        {p.summary}
-                      </p>
+                      <p className="mt-1 text-gray-600">{p.summary}</p>
                     )}
 
-                    {/* Secondary tags (subtle) */}
                     {p.tags?.length > 1 && (
                       <div className="mt-3 flex flex-wrap gap-2">
                         {p.tags.slice(1).map((t) => (
@@ -170,7 +163,6 @@ export default function BlogClient({
                   </div>
 
                   <div className="shrink-0 pt-1 text-gray-300 group-hover:text-blue-600 transition-colors">
-                    {/* right arrow */}
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
                       <path
                         d="M9 6l6 6-6 6"
@@ -184,10 +176,7 @@ export default function BlogClient({
                 </div>
               </Link>
 
-              {/* Divider between items */}
-              {idx !== filtered.length - 1 && (
-                <div className="h-px bg-gray-200/70" />
-              )}
+              {idx !== filtered.length - 1 && <div className="h-px bg-gray-200/70" />}
             </div>
           );
         })}
