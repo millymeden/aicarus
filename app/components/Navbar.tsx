@@ -6,11 +6,12 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 const navLinkClass =
-  "text-[20px] font-medium text-gray-800 tracking-wide " +
+  "relative text-[18px] font-medium text-gray-800 tracking-wide " +
   "transition-all duration-200 ease-out " +
-  "hover:text-blue-600 hover:-translate-y-[1px] " +
+  "hover:text-[var(--aicarus-blue)] hover:-translate-y-[1px] " +
   "after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full " +
-  "after:origin-left after:scale-x-0 after:rounded-full after:bg-blue-600 " +
+  "after:origin-left after:scale-x-0 after:rounded-full " +
+  "after:bg-[var(--aicarus-blue)] " +
   "after:transition-transform after:duration-200 after:ease-out " +
   "hover:after:scale-x-100";
 
@@ -27,7 +28,7 @@ export default function Navbar() {
   }, [pathname]);
 
   return (
-    <nav className="bg-white border-b border-gray-200/70 relative">
+    <nav className="bg-white border-b border-blue-100 relative">
       {/* subtle high-tech top glow */}
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-500/40 to-transparent" />
 

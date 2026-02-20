@@ -51,7 +51,7 @@ export default function BlogClient({
         p.tags.some((t) => normalize(t).includes(q));
       return matchesTag && matchesQuery;
     });
-  }, [posts, query, activeTag]);
+  }, [posts, query, activeTag]);   
 
   return (
     <div className="space-y-6">
@@ -72,8 +72,9 @@ export default function BlogClient({
                 strokeLinecap="round"
               />
             </svg>
-          </div>
-
+          </div> 
+            
+    
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
@@ -114,79 +115,76 @@ export default function BlogClient({
           </button>
         ))}
       </div>
+{/* List */}
+<div className="panel">
+  {filtered.map((p, idx) => {
+    const primaryTag = p.tags?.[0] ?? "";
+    return (
+      <div key={p.slug}>
+        <Link
+          href={`/blog/${p.slug}`}
+          className="group block px-6 py-5 transition hover:bg-gray-50"
+        >
+          {/* meta row */}
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-gray-500">
+            {!!p.date && <span className="font-medium">{formatDate(p.date)}</span>}
 
-      {/* List */}
-      <div className="panel">
-        {filtered.map((p, idx) => {
-          const primaryTag = p.tags?.[0] ?? "";
-          return (
-            <div key={p.slug}>
-              <Link
-                href={`/blog/${p.slug}`}
-                className="group block px-6 py-5 transition hover:bg-gray-50"
-              >
-                {/* meta row */}
-                <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-gray-500">
-                  {!!p.date && (
-                    <span className="font-medium">{formatDate(p.date)}</span>
-                  )}
-                  {!!primaryTag && (
-                    <span className="inline-flex items-center rounded-full border border-gray-200 bg-white px-3 py-1 text-xs font-medium text-gray-700">
-                      {primaryTag}
-                    </span>
-                  )}
-                </div>
-
-                {/* title + arrow */}
-                <div className="mt-2 flex items-start justify-between gap-6">
-                  <div className="min-w-0">
-                    <h2 className="text-lg font-semibold text-gray-900 group-hover:text-blue-700 transition-colors">
-                      {p.title}
-                    </h2>
-
-                    {!!p.summary && (
-                      <p className="mt-1 text-gray-600">{p.summary}</p>
-                    )}
-
-                    {p.tags?.length > 1 && (
-                      <div className="mt-3 flex flex-wrap gap-2">
-                        {p.tags.slice(1).map((t) => (
-                          <span
-                            key={t}
-                            className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-700"
-                          >
-                            {t}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="shrink-0 pt-1 text-gray-300 group-hover:text-blue-600 transition-colors">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                      <path
-                        d="M9 6l6 6-6 6"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </div>
-                </div>
-              </Link>
-
-              {idx !== filtered.length - 1 && <div className="h-px bg-gray-200/70" />}
-            </div>
-          );
-        })}
-
-        {filtered.length === 0 && (
-          <div className="px-6 py-12 text-center text-gray-600">
-            No posts match your search/filter.
+            {!!primaryTag && (
+              <span className="inline-flex items-center rounded-full border border-gray-200 bg-white px-3 py-1 text-xs font-medium text-gray-700">
+                {primaryTag}
+              </span>
+            )}
           </div>
-        )}
+
+          {/* title + arrow */}
+          <div className="mt-2 flex items-start justify-between gap-6">
+            <div className="min-w-0">
+              <h2 className="text-lg font-semibold text-gray-900 group-hover:text-blue-700 transition-colors">
+                {p.title}
+              </h2>
+
+              {!!p.summary && <p className="mt-1 text-gray-600">{p.summary}</p>}
+
+              {/* secondary tags */}
+              {p.tags?.length > 1 && (
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {p.tags.slice(1).map((t) => (
+                    <span
+                      key={t}
+                      className="rounded-full bg-[#f3f6ff] px-3 py-1 text-xs font-medium text-gray-700"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <div className="shrink-0 pt-1 text-gray-300 group-hover:text-blue-600 transition-colors">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M9 6l6 6-6 6"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </div>
+          </div>
+        </Link>
+
+        {idx !== filtered.length - 1 && <div className="h-px bg-gray-200/70" />}
       </div>
+    );
+  })}
+
+  {filtered.length === 0 && (
+    <div className="px-6 py-12 text-center text-gray-600">
+      No posts match your search/filter.
+    </div>
+  )}
+</div>
     </div>
   );
 }

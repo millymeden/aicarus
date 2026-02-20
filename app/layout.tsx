@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "./components/Navbar";
+import SiteShell from "./components/SiteShell";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
 
 export const metadata: Metadata = {
   title: "Aicarus",
@@ -14,10 +20,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-        <Navbar />
-        {/* This is the missing piece that gives margins + layout everywhere */}
-        <main className="site-main page">{children}</main>
+      <body
+        className={`${inter.variable} bg-gradient-to-b from-white to-[#fafbff] text-gray-900 antialiased font-sans`}
+      >
+        <SiteShell>{children}</SiteShell>
       </body>
     </html>
   );

@@ -8,6 +8,14 @@
   --foreground: #171717;
 }
 
+:root {
+  --aicarus-blue: #5197d8;
+  --aicarus-blue-dark: #013783;
+  --aicarus-blue-soft: #E8F0FF;
+  --aicarus-accent: #F59E0B;
+  --aicarus-text: #111827;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -15,12 +23,6 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
 
 body {
   background: var(--background);
@@ -48,18 +50,7 @@ body {
   --accent-soft: 59 130 246; /* blue-500-ish */
 }
 
-/* Optional: if you later add dark mode */
-.dark {
-  --bg: 10 12 18;
-  --surface: 14 17 26;
-  --card: 17 21 32;
-  --text: 241 245 249;
-  --muted: 148 163 184;
-  --faint: 100 116 139;
-  --border: 30 41 59;
-  --accent: 59 130 246;
-  --accent-soft: 96 165 250;
-}
+
 @layer base {
   html {
     text-rendering: optimizeLegibility;
@@ -117,8 +108,12 @@ body {
       border border-gray-200 bg-white text-gray-900 hover:bg-gray-50 transition;
   }
 
-  .btn-accent {
-    @apply inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-medium
-      bg-blue-600 text-white hover:bg-blue-700 transition;
-  }
+ .btn-accent {
+  @apply inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-medium
+    text-white transition;
+  background: var(--aicarus-blue);
+}
+.btn-accent:hover {
+  background: var(--aicarus-blue-dark);
+}
 }
