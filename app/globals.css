@@ -109,9 +109,11 @@ body {
   }
 
  .btn-accent {
-  @apply inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-medium
-    text-white transition;
-  background: var(--aicarus-blue);
+  @apply inline-flex items-center justify-center rounded-xl
+         px-6 py-3 text-base font-medium
+         bg-[var(--aicarus-blue)]
+         text-white transition-all duration-200
+         hover:brightness-110 active:scale-[0.98];
 }
 .btn-accent:hover {
   background: var(--aicarus-blue-dark);

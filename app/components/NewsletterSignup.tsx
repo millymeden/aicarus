@@ -40,9 +40,6 @@ export default function NewsletterSignup() {
             <p className="mt-2 text-gray-600">
               Plain-language briefings on AI safety, governance, and key developments.
             </p>
-            <p className="mt-2 text-xs text-gray-500">
-              No spam. Unsubscribe anytime.
-            </p>
           </div>
 
           <form
@@ -61,7 +58,7 @@ export default function NewsletterSignup() {
             <button
             type="submit"
              disabled={state === "loading"}
-            className="btn-accent whitespace-nowrap disabled:opacity-60"
+            className="btn-accent whitespace-nowrap disabled:opacity-60 px-6 py-3 text-base"
         >
          {state === "loading" ? "Subscribing..." : "Subscribe"}
             </button>
