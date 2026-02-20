@@ -6,7 +6,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 const navLinkClass =
-  "text-[18px] font-medium text-gray-800 tracking-wide " +
+  "text-[20px] font-medium text-gray-800 tracking-wide " +
   "transition-all duration-200 ease-out " +
   "hover:text-blue-600 hover:-translate-y-[1px] " +
   "after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full " +
