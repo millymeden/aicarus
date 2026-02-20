@@ -137,7 +137,7 @@ export default function BlogClient({
           {/* title + arrow */}
           <div className="mt-2 flex items-start justify-between gap-6">
             <div className="min-w-0">
-              <h2 className="text-lg font-semibold text-gray-900 group-hover:text-blue-700 transition-colors">
+              <h2 className="text-lg font-semibold text-gray-900 group-hover:text-[var(--aicarus-blue-dark)] transition-colors">
                 {p.title}
               </h2>
 
@@ -158,7 +158,7 @@ export default function BlogClient({
               )}
             </div>
 
-            <div className="shrink-0 pt-1 text-gray-300 group-hover:text-blue-600 transition-colors">
+            <div className="shrink-0 pt-1 text-gray-300 group-hover:text-[var(--aicarus-blue-dark)] transition-colors">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
                 <path
                   d="M9 6l6 6-6 6"
