@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Aicarus",
-  description: "AI Safety initiative",
+  description: "AI Safety",
 };
 
 export default function RootLayout({
@@ -28,11 +28,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
+    
         className={`${geistSans.variable} ${geistMono.variable} antialiased aicarus-page`}
       >
         <Navbar />
 
-        <main className="aicarus-container aicarus-section">{children}</main>
+        <main className="site-main page">{children}</main>
 
         <NewsletterGate />
       </body>
