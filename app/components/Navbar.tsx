@@ -52,14 +52,15 @@ export default function Navbar() {
                 About
               </Link>
             </li>
-            <li>
-              <Link href="/blog" className={navLinkClass}>
-                Making Sense of AI?
-              </Link>
-            </li>
+           
             <li>
               <Link href="/basics" className={navLinkClass}>
                 The Basics
+              </Link>
+            </li>
+             <li>
+              <Link href="/blog" className={navLinkClass}>
+                Making Sense of AI?
               </Link>
             </li>
             <li>
@@ -158,11 +159,12 @@ export default function Navbar() {
                 <Link href="/about" className={mobileLinkClass}>
                   About
                 </Link>
-                <Link href="/blog" className={mobileLinkClass}>
-                  Making Sense of AI?
-                </Link>
+                
                 <Link href="/basics" className={mobileLinkClass}>
                   The Basics
+                </Link>
+                <Link href="/blog" className={mobileLinkClass}>
+                  Making Sense of AI?
                 </Link>
                 <Link href="/visual" className={mobileLinkClass}>
                   Where Are We Now?
