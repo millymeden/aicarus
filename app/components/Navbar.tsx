@@ -10,7 +10,7 @@ export default function Navbar() {
           alt="Aicarus Logo"
           width={1036}
           height={704}
-          className="block h-15 w-auto translate-y-[6px]"
+          className="block h-15 w-auto translate-y-[4px]"
           priority
         />
       </Link>
