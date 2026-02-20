@@ -59,9 +59,7 @@ export default function NewsletterSignup() {
           </button>
         </form>
 
-        <p className="mt-3 text-xs text-gray-500 dark:text-gray-500">
-          No spam. Unsubscribe anytime.
-        </p>
+    
 
         {state === "success" && (
           <p className="mt-4 text-green-600 dark:text-green-400">
