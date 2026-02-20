@@ -1,42 +1,179 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
+
+const navLinkClass =
+  "relative text-sm font-medium text-gray-800 tracking-wide " +
+  "transition-all duration-200 ease-out " +
+  "hover:text-blue-600 hover:-translate-y-[1px] " +
+  "after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full " +
+  "after:origin-left after:scale-x-0 after:rounded-full after:bg-blue-600 " +
+  "after:transition-transform after:duration-200 after:ease-out " +
+  "hover:after:scale-x-100";
+
+const mobileLinkClass =
+  "block w-full rounded-md px-3 py-2 text-sm font-medium text-gray-100 " +
+  "hover:bg-white/10 hover:text-white transition-colors";
 
 export default function Navbar() {
-  return (
-    <nav className="bg-gray-100 h-30 px-4 shadow-md flex items-center justify-between">
-      <Link href="/" className="flex items-center leading-none">
-        <Image
-          src="/logo.png"
-          alt="Aicarus Logo"
-          width={1036}
-          height={704}
-          className="block h-25 w-auto translate-y-[4px]"
-          priority
-        />
-      </Link>
+  const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
-      <ul className="flex items-center space-x-6">
-        <li>
-          <Link href="/about" className="text-black hover:text-blue-600 hover:font-semibold">
-            About
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
+  return (
+    <nav className="bg-white border-b border-gray-200/70 relative">
+      {/* subtle high-tech top glow */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-500/40 to-transparent" />
+
+      <div className="mx-auto flex max-w-6xl items-center px-6 py-2">
+        {/* Left group */}
+        <div className="flex items-center gap-8">
+          <Link href="/" className="flex items-center leading-none shrink-0">
+            <Image
+              src="/logo.png"
+              alt="Aicarus Logo"
+              width={1036}
+              height={704}
+              className="block h-25 w-auto"
+              priority
+            />
           </Link>
-        </li>
-        <li>
-          <Link href="/blog" className="text-black hover:text-blue-600 hover:font-semibold">
-            Making Sense of AI?
-          </Link>
-        </li>
-        <li>
-          <Link href="/basics" className="text-black hover:text-blue-600 hover:font-semibold">
-            The Basics
-          </Link>
-        </li>
-        <li>
-          <Link href="/visual" className="text-black hover:text-blue-600 hover:font-semibold">
-            Where Are We Now?
-          </Link>
-        </li>
-      </ul>
+
+          {/* Desktop nav */}
+          <ul className="hidden md:flex items-center gap-8 whitespace-nowrap">
+            <li>
+              <Link href="/about" className={navLinkClass}>
+                About
+              </Link>
+            </li>
+            <li>
+              <Link href="/blog" className={navLinkClass}>
+                Making Sense of AI?
+              </Link>
+            </li>
+            <li>
+              <Link href="/basics" className={navLinkClass}>
+                The Basics
+              </Link>
+            </li>
+            <li>
+              <Link href="/visual" className={navLinkClass}>
+                Where Are We Now?
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        {/* Right side */}
+        <div className="ml-auto flex items-center">
+          {/* Mobile hamburger */}
+          <button
+            type="button"
+            className="md:hidden inline-flex items-center justify-center rounded-md p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 transition-colors"
+            aria-label="Open menu"
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+          >
+            {/* Prettier high-tech hamburger (more spacing) */}
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M5 7H19"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+              <path
+                d="M5 12H19"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+              <path
+                d="M5 17H19"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile overlay + right drawer */}
+      {open && (
+        <div className="md:hidden fixed inset-0 z-50">
+          {/* dim overlay (click to close) */}
+          <button
+            aria-label="Close menu overlay"
+            className="absolute inset-0 bg-black/20"
+            onClick={() => setOpen(false)}
+          />
+
+          {/* right-side drawer (half screen) */}
+          <div className="absolute right-0 top-0 h-full w-1/2 min-w-[260px] bg-slate-950/60 backdrop-blur-md border-l border-white/10 shadow-2xl">
+            <div className="flex items-center justify-between px-5 py-4 border-b border-white/10">
+              <span className="text-sm font-semibold tracking-wide text-white/90">
+                Menu
+              </span>
+
+              {/* close button */}
+              <button
+                aria-label="Close menu"
+                className="rounded-md p-2 text-white/70 hover:text-white hover:bg-white/10 transition-colors"
+                onClick={() => setOpen(false)}
+              >
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M6 6L18 18M18 6L6 18"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            <div className="px-4 py-4 space-y-1">
+              <Link href="/about" className={mobileLinkClass}>
+                About
+              </Link>
+              <Link href="/blog" className={mobileLinkClass}>
+                Making Sense of AI?
+              </Link>
+              <Link href="/basics" className={mobileLinkClass}>
+                The Basics
+              </Link>
+              <Link href="/visual" className={mobileLinkClass}>
+                Where Are We Now?
+              </Link>
+            </div>
+
+            <div className="px-5 py-4 border-t border-white/10">
+              <p className="text-xs text-white/50">
+                Aicarus — AI safety, clearly explained.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }
