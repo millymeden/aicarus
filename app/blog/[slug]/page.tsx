@@ -26,46 +26,42 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         </Link>
 
         {/* Header */}
-        <header className="mb-10 text-center">
+        <header className="mb-10">
+          {/* Tags */}
+          {meta.tags.length > 0 && (
+            <div className="flex flex-wrap gap-2 mb-5">
+              {meta.tags.map((t) => (
+                <span
+                  key={t}
+                  className="rounded-full bg-blue-50 border border-blue-100 px-3 py-0.5 text-xs font-medium text-blue-700"
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
+          )}
+
           {/* Title */}
-          <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-gray-900 leading-tight">
+          <h1 className="text-3xl md:text-4xl font-semibold tracking-tight text-gray-900 leading-tight">
             {meta.title}
           </h1>
 
           {/* Summary */}
           {meta.summary && (
-            <p className="mt-4 text-lg md:text-xl text-gray-500 leading-relaxed max-w-2xl mx-auto">
+            <p className="mt-4 text-lg text-gray-500 leading-relaxed max-w-2xl">
               {meta.summary}
             </p>
           )}
 
-          {/* Byline */}
-          <div className="mt-6 flex items-center justify-center gap-3">
-            {meta.author && (
-              <>
-                <div className="w-9 h-9 rounded-full bg-[var(--aicarus-blue)] flex items-center justify-center text-white text-sm font-semibold shrink-0">
-                  {meta.author.split(" ").map((n) => n[0]).join("").slice(0, 2)}
-                </div>
-                <div className="flex flex-col items-start text-sm leading-tight">
-                  <span className="font-medium text-gray-900">{meta.author}</span>
-                  <div className="flex items-center gap-2 text-gray-500">
-                    <time>{meta.date}</time>
-                    {meta.tags.length > 0 && (
-                      <>
-                        <span className="text-gray-300">·</span>
-                        <div className="flex flex-wrap gap-1.5">
-                          {meta.tags.map((t) => (
-                            <span key={t} className="rounded-full bg-blue-50 border border-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-700">
-                              {t}
-                            </span>
-                          ))}
-                        </div>
-                      </>
-                    )}
-                  </div>
-                </div>
-              </>
-            )}
+          {/* Byline — Substack style */}
+          <div className="mt-5 flex items-center gap-3">
+            <div className="w-9 h-9 rounded-full bg-[var(--aicarus-blue)] flex items-center justify-center text-white text-sm font-semibold shrink-0">
+              {meta.author.split(" ").map((n) => n[0]).join("").slice(0, 2)}
+            </div>
+            <div className="flex flex-col text-sm leading-tight">
+              <span className="font-medium text-gray-900">{meta.author}</span>
+              <time className="text-gray-500">{meta.date}</time>
+            </div>
           </div>
         </header>
 
