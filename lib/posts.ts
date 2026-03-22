@@ -8,6 +8,7 @@ export type PostMeta = {
   date: string;
   summary: string;
   tags: string[];
+  author: string;
 };
 
 const POSTS_DIR = path.join(process.cwd(), "content", "blog");
@@ -29,6 +30,7 @@ export function getAllPosts(): PostMeta[] {
       date: String(data.date ?? ""),
       summary: String(data.summary ?? ""),
       tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
+      author: String(data.author ?? ""),
     } satisfies PostMeta;
   });
 

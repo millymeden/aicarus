@@ -29,6 +29,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         <header className="mb-10">
           <div className="flex flex-wrap items-center gap-3 mb-4">
             <time className="text-sm text-gray-500">{meta.date}</time>
+            {meta.author && (
+              <>
+                <span className="text-gray-300">·</span>
+                <span className="text-sm text-gray-500">{meta.author}</span>
+              </>
+            )}
             {meta.tags.length > 0 && (
               <>
                 <span className="text-gray-300">·</span>
