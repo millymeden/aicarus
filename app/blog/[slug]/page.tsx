@@ -27,40 +27,40 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
         {/* Header */}
         <header className="mb-10">
-          <div className="flex flex-wrap items-center gap-3 mb-4">
-            <time className="text-sm text-gray-500">{meta.date}</time>
-            {meta.author && (
-              <>
-                <span className="text-gray-300">·</span>
-                <span className="text-sm text-gray-500">{meta.author}</span>
-              </>
-            )}
-            {meta.tags.length > 0 && (
-              <>
-                <span className="text-gray-300">·</span>
-                <div className="flex flex-wrap gap-2">
-                  {meta.tags.map((t) => (
-                    <span
-                      key={t}
-                      className="rounded-full bg-blue-50 border border-blue-100 px-3 py-0.5 text-xs font-medium text-blue-700"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </>
-            )}
-          </div>
+          {/* Tags */}
+          {meta.tags.length > 0 && (
+            <div className="flex flex-wrap gap-2 mb-5">
+              {meta.tags.map((t) => (
+                <span
+                  key={t}
+                  className="rounded-full bg-blue-50 border border-blue-100 px-3 py-0.5 text-xs font-medium text-blue-700"
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
+          )}
 
+          {/* Title */}
           <h1 className="text-3xl md:text-4xl font-semibold tracking-tight text-gray-900 leading-tight">
             {meta.title}
           </h1>
 
+          {/* Summary */}
           {meta.summary && (
             <p className="mt-4 text-lg text-gray-500 leading-relaxed max-w-2xl">
               {meta.summary}
             </p>
           )}
+
+          {/* Byline */}
+          <div className="mt-5 flex items-center gap-2 text-sm">
+            {meta.author && (
+              <span className="font-medium text-gray-900">{meta.author}</span>
+            )}
+            {meta.author && <span className="text-gray-300">·</span>}
+            <time className="text-gray-500">{meta.date}</time>
+          </div>
         </header>
 
         <div className="h-px w-full bg-gray-200 mb-10" />
