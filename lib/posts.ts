@@ -50,6 +50,7 @@ export function getPostBySlug(slug: string) {
     date: String(data.date ?? ""),
     summary: String(data.summary ?? ""),
     tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
+    author: String(data.author ?? ""),
   };
 
   return { meta, content };
