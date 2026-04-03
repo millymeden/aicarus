@@ -1,5 +1,3 @@
-import { notFound } from "next/navigation";
-import Link from "next/link";
 import { getAllPosts, getPostBySlug } from "@/lib/posts";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
@@ -8,83 +6,42 @@ export function generateStaticParams() {
   return getAllPosts().map((p) => ({ slug: p.slug }));
 }
 
-export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function BlogPostPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
+  const { meta, content } = getPostBySlug(slug);
 
-  try {
-    const { meta, content } = getPostBySlug(slug);
+  return (
+    <article className="py-10">
+      <div className="mb-8">
+        <div className="kicker">Blog</div>
+        <h1 className="h1">{meta.title}</h1>
+        <p className="lead">{meta.summary}</p>
 
-    return (
-      <article>
-        {/* Back link */}
-        <Link
-          href="/blog"
-          className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-900 transition-colors mb-10 group"
-        >
-          <span className="group-hover:-translate-x-0.5 transition-transform">←</span>
-          All posts
-        </Link>
-
-        {/* Header */}
-        <header className="mb-10">
-          {/* Tags */}
-          {meta.tags.length > 0 && (
-            <div className="flex flex-wrap gap-2 mb-5">
-              {meta.tags.map((t) => (
-                <span
-                  key={t}
-                  className="rounded-full bg-blue-50 border border-blue-100 px-3 py-0.5 text-xs font-medium text-blue-700"
-                >
-                  {t}
-                </span>
-              ))}
-            </div>
-          )}
-
-          {/* Title */}
-          <h1 className="text-3xl md:text-4xl font-semibold tracking-tight text-gray-900 leading-tight">
-            {meta.title}
-          </h1>
-
-          {/* Summary */}
-          {meta.summary && (
-            <p className="mt-4 text-lg text-gray-500 leading-relaxed max-w-2xl">
-              {meta.summary}
-            </p>
-          )}
-
-          {/* Byline — Substack style */}
-          <div className="mt-5 flex items-center gap-3">
-            <div className="w-9 h-9 rounded-full bg-[var(--aicarus-blue)] flex items-center justify-center text-white text-sm font-semibold shrink-0">
-              {meta.author.split(" ").map((n) => n[0]).join("").slice(0, 2)}
-            </div>
-            <div className="flex flex-col text-sm leading-tight">
-              <span className="font-medium text-gray-900">{meta.author}</span>
-              <time className="text-gray-500">{meta.date}</time>
-            </div>
-          </div>
-        </header>
-
-        <div className="h-px w-full bg-gray-200 mb-10" />
-
-        {/* Article body */}
-        <div className="prose prose-gray max-w-none
-          prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-gray-900
-          prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4
-          prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
-          prose-p:text-gray-700 prose-p:leading-[1.8] prose-p:my-5
-          prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline
-          prose-strong:text-gray-900 prose-strong:font-semibold
-          prose-blockquote:border-l-4 prose-blockquote:border-blue-200 prose-blockquote:bg-blue-50/50 prose-blockquote:py-1 prose-blockquote:rounded-r-lg
-          prose-code:text-blue-700 prose-code:bg-blue-50 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:font-normal
-          prose-pre:bg-gray-950 prose-pre:text-gray-100
-          prose-li:text-gray-700 prose-li:my-1.5
-          prose-hr:border-gray-200">
-          <MDXRemote source={content} options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }} />
+        <div className="mt-4 flex flex-wrap gap-2">
+          {meta.tags.map((t) => (
+            <span
+              key={t}
+              className="rounded-full bg-[#f3f6ff] px-3 py-1 text-xs font-medium text-gray-700"
+            >
+              {t}
+            </span>
+          ))}
         </div>
-      </article>
-    );
-  } catch {
-    notFound();
-  }
+
+        <div className="mt-4 text-sm text-gray-500">{meta.date}</div>
+        <div className="divider" />
+      </div>
+
+      <div className="article">
+        <MDXRemote
+          source={content}
+          options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
+        />
+      </div>
+    </article>
+  );
 }
