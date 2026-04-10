@@ -14,7 +14,7 @@ export default function Basics() {
       {/* Page content */}
       <div className="space-y-6 text-gray-700 leading-7">
         <p>
-          This section provides a clear, jargon-free introduction to the key
+          This section will provide a clear, jargon-free introduction to the key
           ideas behind modern artificial intelligence and the risks associated
           with increasingly capable systems.
         </p>
