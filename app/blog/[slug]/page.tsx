@@ -36,7 +36,7 @@ export default async function BlogPostPage({
         <div className="divider" />
       </div>
 
-      <div className="article">
+      <div className="prose prose-gray max-w-none">
         <MDXRemote
           source={content}
           options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
