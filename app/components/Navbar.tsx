@@ -4,15 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Cinzel } from "next/font/google";
-
-// Roman inscription-style capitals for the wordmark, echoing the classical
-// Icarus imagery in the logo. Cinzel has no lowercase: "Aicarus" renders as a
-// tall A followed by small capitals, echoing the big A in the logo.
-const wordmarkFont = Cinzel({
-  subsets: ["latin"],
-  weight: ["500"],
-});
+import { wordmarkFont } from "@/lib/fonts";
 
 const navLinkClass =
   "relative text-[18px] font-medium text-gray-800 tracking-wide " +

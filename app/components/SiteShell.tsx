@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import Navbar from "./Navbar";
+import Footer from "./Footer";
 import NewsletterSignup from "./NewsletterSignup";
 
 // Newsletter signup is hidden everywhere for now. The component and the
@@ -32,6 +33,7 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
             </div>
           )}
         </main>
+        <Footer />
       </>
     );
   }
@@ -43,6 +45,7 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
         {children}
         {SHOW_NEWSLETTER && !hideNewsletter && <NewsletterSignup />}
       </main>
+      <Footer />
     </>
   );
 }

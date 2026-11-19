@@ -36,21 +36,21 @@ export default function Home() {
           className="pointer-events-none absolute -bottom-32 -left-24 h-[24rem] w-[24rem] rounded-full bg-[radial-gradient(circle,rgba(81,151,216,0.18),transparent_65%)] blur-2xl"
         />
 
-        <div className="relative mx-auto flex min-h-[68vh] max-w-5xl flex-col justify-center px-6 py-20 md:px-10 md:py-28">
-          <div className="kicker flex items-center gap-2">
+        <div className="relative mx-auto flex min-h-[68vh] max-w-5xl flex-col items-center justify-center px-6 py-20 text-center md:px-10 md:py-28">
+          <div className="kicker flex items-center justify-center gap-2">
             <span className="inline-block h-2 w-2 rounded-full bg-[var(--aicarus-accent)]" />
             Aicarus
           </div>
-          <h1 className="mt-5 max-w-4xl text-4xl font-semibold leading-[1.08] tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
+          <h1 className="mx-auto mt-5 max-w-4xl text-4xl font-semibold leading-[1.08] tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
             Making AI policy technically grounded and enforceable
           </h1>
-          <div className="mt-8 h-1 w-16 rounded-full bg-gradient-to-r from-[var(--aicarus-blue)] to-[var(--aicarus-blue-dark)]" />
-          <p className="mt-8 max-w-2xl text-lg leading-8 text-gray-700 md:text-xl md:leading-9">
+          <div className="mx-auto mt-8 h-1 w-16 rounded-full bg-gradient-to-r from-[var(--aicarus-blue)] to-[var(--aicarus-blue-dark)]" />
+          <p className="mx-auto mt-8 max-w-2xl text-lg leading-8 text-gray-700 md:text-xl md:leading-9">
             Aicarus is a research and policy organisation doing policy-directed
             technical research that enables specific and technically enforceable
             AI policies.
           </p>
-          <p className="mt-4 max-w-2xl text-base leading-8 text-gray-600 md:text-lg">
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-8 text-gray-600 md:text-lg">
             Starting from the specific policy need, Aicarus produces technical
             solutions and delivers a policy proposal ready for policymakers to
             use.
