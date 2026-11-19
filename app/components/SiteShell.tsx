@@ -23,7 +23,7 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
   if (pathname === "/") {
     return (
       <>
-        <Navbar />
+        <Navbar overlay />
         <main>
           {children}
           {SHOW_NEWSLETTER && (

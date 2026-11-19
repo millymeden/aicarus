@@ -4,6 +4,15 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { Cinzel } from "next/font/google";
+
+// Roman inscription-style capitals for the wordmark, echoing the classical
+// Icarus imagery in the logo. Cinzel has no lowercase: "Aicarus" renders as a
+// tall A followed by small capitals, echoing the big A in the logo.
+const wordmarkFont = Cinzel({
+  subsets: ["latin"],
+  weight: ["500"],
+});
 
 const navLinkClass =
   "relative text-[18px] font-medium text-gray-800 tracking-wide " +
@@ -29,7 +38,9 @@ const NAV_LINKS: { href: string; label: string }[] = [
   // { href: "/visual", label: "Where Are We Now?" },
 ];
 
-export default function Navbar() {
+// `overlay`: the navbar floats transparently over the top of the page, so the
+// home page hero background runs up behind it.
+export default function Navbar({ overlay = false }: { overlay?: boolean }) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
@@ -38,11 +49,19 @@ export default function Navbar() {
   }, [pathname]);
 
   return (
-    <nav className="bg-white border-b border-blue-100 relative">
+    <nav
+      className={
+        overlay
+          ? "absolute inset-x-0 top-0 z-20 bg-transparent"
+          : "bg-white border-b border-blue-100 relative"
+      }
+    >
       {/* subtle high-tech top glow */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-500/40 to-transparent" />
+      {!overlay && (
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-500/40 to-transparent" />
+      )}
 
-      <div className="flex items-center px-6 py-2">
+      <div className="relative flex items-center px-6 py-2">
         {/* Left group */}
         <div className="flex items-center gap-8">
           <Link href="/" className="flex items-center leading-none shrink-0">
@@ -51,7 +70,7 @@ export default function Navbar() {
               alt="Aicarus Logo"
               width={1036}
               height={704}
-              className="block h-35 w-auto"
+              className="block h-24 md:h-35 w-auto"
               priority
             />
           </Link>
@@ -70,8 +89,16 @@ export default function Navbar() {
           )}
         </div>
 
+        {/* Wordmark: centred on wider screens, right-aligned on phones */}
+        <Link
+          href="/"
+          className={`${wordmarkFont.className} ml-auto md:ml-0 md:absolute md:left-1/2 md:-translate-x-1/2 text-[24px] md:text-[38px] font-medium tracking-[0.12em] pl-[0.12em] text-[var(--aicarus-blue-dark)] leading-none`}
+        >
+          Aicarus
+        </Link>
+
         {/* Right side */}
-        <div className="ml-auto flex items-center">
+        <div className="md:ml-auto flex items-center">
           {/* Mobile hamburger */}
           {NAV_LINKS.length > 0 && (
           <button

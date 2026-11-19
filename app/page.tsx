@@ -19,7 +19,7 @@ export default function Home() {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-blue-100 bg-gradient-to-b from-[var(--aicarus-blue-soft)] via-white to-white">
+      <section className="relative overflow-hidden border-b border-blue-100 pt-[112px] md:pt-[156px] bg-gradient-to-b from-[var(--aicarus-blue-soft)] via-white to-white">
         {/* faint grid */}
         <div
           aria-hidden
@@ -56,15 +56,6 @@ export default function Home() {
             use.
           </p>
 
-          <a
-            href="#the-problem"
-            aria-label="Scroll to the next section"
-            className="mt-14 inline-flex h-11 w-11 items-center justify-center self-start rounded-full border border-blue-200 bg-white/70 text-[var(--aicarus-blue)] backdrop-blur transition hover:-translate-y-0.5 hover:border-[var(--aicarus-blue)]"
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
-              <path d="M12 5v14M6 13l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </a>
         </div>
       </section>
 
