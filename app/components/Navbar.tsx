@@ -19,6 +19,16 @@ const mobileLinkClass =
   "block w-full rounded-md px-7 py-3 text-sm font-medium text-white/90 " +
   "hover:bg-white/10 hover:text-white transition-colors";
 
+// Tabs shown in the navbar. The pages behind them still exist in the code;
+// they are hidden for now. To bring one back, uncomment it here AND remove
+// its redirect in next.config.ts.
+const NAV_LINKS: { href: string; label: string }[] = [
+  // { href: "/about", label: "About" },
+  // { href: "/basics", label: "The Basics" },
+  // { href: "/blog", label: "Making Sense of AI?" },
+  // { href: "/visual", label: "Where Are We Now?" },
+];
+
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
@@ -47,34 +57,23 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop nav */}
-          <ul className="hidden md:flex items-center gap-8 whitespace-nowrap">
-            <li>
-              <Link href="/about" className={navLinkClass}>
-                About
-              </Link>
-            </li>
-           
-            <li>
-              <Link href="/basics" className={navLinkClass}>
-                The Basics
-              </Link>
-            </li>
-             <li>
-              <Link href="/blog" className={navLinkClass}>
-                Making Sense of AI?
-              </Link>
-            </li>
-            <li>
-              <Link href="/visual" className={navLinkClass}>
-                Where Are We Now?
-              </Link>
-            </li>
-          </ul>
+          {NAV_LINKS.length > 0 && (
+            <ul className="hidden md:flex items-center gap-8 whitespace-nowrap">
+              {NAV_LINKS.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className={navLinkClass}>
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         {/* Right side */}
         <div className="ml-auto flex items-center">
           {/* Mobile hamburger */}
+          {NAV_LINKS.length > 0 && (
           <button
             type="button"
             className="md:hidden inline-flex items-center justify-center rounded-lg p-3 text-gray-500 hover:text-gray-700 hover:bg-gray-100 transition-colors"
@@ -110,6 +109,7 @@ export default function Navbar() {
               />
             </svg>
           </button>
+          )}
         </div>
       </div>
 
@@ -157,19 +157,11 @@ export default function Navbar() {
               </div>
 
               <div className="px-4 py-4 space-y-1">
-                <Link href="/about" className={mobileLinkClass}>
-                  About
-                </Link>
-                
-                <Link href="/basics" className={mobileLinkClass}>
-                  The Basics
-                </Link>
-                <Link href="/blog" className={mobileLinkClass}>
-                  Making Sense of AI?
-                </Link>
-                <Link href="/visual" className={mobileLinkClass}>
-                  Where Are We Now?
-                </Link>
+                {NAV_LINKS.map((link) => (
+                  <Link key={link.href} href={link.href} className={mobileLinkClass}>
+                    {link.label}
+                  </Link>
+                ))}
               </div>
 
               <div className="px-5 py-4 border-t border-white/10">
